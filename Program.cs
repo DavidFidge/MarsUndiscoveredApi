@@ -1,3 +1,5 @@
+using MarsUndiscoveredApi.Models;
+using MarsUndiscoveredApi.Services;
 using Serilog;
 
 try
@@ -17,6 +19,11 @@ try
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    
+    builder.Services.Configure<DatabaseSettings>(
+        builder.Configuration.GetSection("MarsUndiscoveredDatabase"));
+    
+    builder.Services.AddSingleton<IMorgueService, MorgueService>();
 
     var app = builder.Build();
 
