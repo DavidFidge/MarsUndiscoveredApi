@@ -1,0 +1,18 @@
+<h3>Morgue</h3>
+
+<table class="table table-dark">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Username</th>
+      <th scope="col">Game Start</th>
+      <th scope="col">Game End</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let morgue of morgues">
+    <td>{{morgue.id}}</td>
+    <td>{{morgue.username}}</td>
+    <td>{{morgue.startDate}}</td>
+    <td>{{morgue.endDate}}</td>
+  </tr>
+</table>
