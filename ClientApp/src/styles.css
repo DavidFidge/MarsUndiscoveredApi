@@ -18,3 +18,15 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+a {
+  color:#ffc107
+}
+
+a:focus {
+  color:#ffdd55
+}
+
+a:hover {
+  color:#ffdd55
+}
