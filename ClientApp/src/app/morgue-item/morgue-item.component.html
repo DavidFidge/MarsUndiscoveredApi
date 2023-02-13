@@ -1,1 +1,6 @@
-<p>morgue-item works!</p>
+
+<div *ngIf="morgueReport">
+<h3 class="text-center">Morgue - {{morgueReport.username}} - {{morgueReport.date}} </h3>
+
+<pre>{{morgueReport.report}}</pre>
+</div>

@@ -1,18 +1,22 @@
-<h3>Morgue</h3>
+<h3 class="text-center">Morgue</h3>
 
-<table class="table table-dark">
+<table class="table table-dark bg-transparent">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Id</th>
+      <th scope="col">Date</th>
       <th scope="col">Username</th>
-      <th scope="col">Game Start</th>
-      <th scope="col">Game End</th>
+      <th scope="col">Seed</th>
+      <th scope="col">Fate</th>
+      <th scope="col">Epitaph</th>
+      <th scope="col">Report</th>
     </tr>
   </thead>
   <tr *ngFor="let morgue of morgues">
-    <td>{{morgue.id}}</td>
-    <td>{{morgue.username}}</td>
-    <td>{{morgue.startDate}}</td>
     <td>{{morgue.endDate}}</td>
+    <td>{{morgue.username}}</td>
+    <td>{{morgue.seed }}</td>
+    <td>{{morgue.fate }}</td>
+    <td>{{morgue.gameEndStatus }}</td>
+    <td><a [routerLink]="['/morgue-item', morgue.id]" class="bg-transparent">Report</a></td>
   </tr>
 </table>

@@ -28,6 +28,7 @@ import { MorgueItemComponent } from './morgue-item/morgue-item.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'morgue', component: MorgueComponent },
+      { path: 'morgue-item/:id', component: MorgueItemComponent },
     ])
   ],
   providers: [],
