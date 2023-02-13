@@ -50,9 +50,11 @@ export class Morgue {
     this.endDate = date.toDateString();
     this.fate = morgueInterface.isVictorious ? "Won" : "Lost";
     this.gameEndStatus = morgueInterface.gameEndStatus;
+    this.gameVersion = morgueInterface.gameVersion;
   }
 
   id: string;
+  gameVersion: string;
   endDate: string;
   username: string;
   seed: string;

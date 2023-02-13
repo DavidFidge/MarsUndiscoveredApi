@@ -6,6 +6,8 @@ public class Morgue
 {
     [BsonId]
     public Guid Id { get; set; }
+    public string GameVersion { get; set; }
+    public int Version { get; set; }
     public string Seed { get; set; }
     public string Username { get; set; }
     public DateTime StartDate { get; set; }
@@ -16,6 +18,5 @@ public class Morgue
     public string GameEndStatus { get; set; }
     public int Health { get; set; }
     public int MaxHealth { get; set; }
-    public string MorgueTextReport { get; set; }
-    public int Version { get; set; }
+    public string TextReport { get; set; }
 }

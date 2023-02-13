@@ -21,7 +21,10 @@ public class MorgueService : IMorgueService
     }
 
     public async Task<List<Morgue>> GetAsync() =>
-        await _morgueCollection.Find(_ => true).SortByDescending(m => m.EndDate).ToListAsync();
+        await _morgueCollection
+            .Find(m => m.Version == 1)
+            .SortByDescending(m => m.EndDate)
+            .ToListAsync();
 
     public async Task<Morgue?> GetAsync(Guid id) =>
         await _morgueCollection.Find(x => x.Id == id).FirstOrDefaultAsync();

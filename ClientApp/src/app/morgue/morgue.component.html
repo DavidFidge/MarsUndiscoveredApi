@@ -4,6 +4,7 @@
   <thead class="thead-dark">
     <tr>
       <th scope="col">Date</th>
+      <th scope="col">Version</th>
       <th scope="col">Username</th>
       <th scope="col">Seed</th>
       <th scope="col">Fate</th>
@@ -13,6 +14,7 @@
   </thead>
   <tr *ngFor="let morgue of morgues">
     <td>{{morgue.endDate}}</td>
+    <td>{{morgue.gameVersion}}</td>
     <td>{{morgue.username}}</td>
     <td>{{morgue.seed }}</td>
     <td>{{morgue.fate }}</td>

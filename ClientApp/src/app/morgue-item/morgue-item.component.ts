@@ -33,7 +33,7 @@ export class MorgueItemComponent implements OnInit {
 
 export class MorgueReport {
   constructor(morgueItem: MorgueReportInterface) {
-    this.report = morgueItem.morgueTextReport;
+    this.report = morgueItem.textReport;
     this.username = morgueItem.username;
 
     let date = new Date(morgueItem.endDate);
