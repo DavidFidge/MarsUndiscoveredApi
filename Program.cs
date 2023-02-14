@@ -1,5 +1,8 @@
+using MarsUndiscoveredApi;
 using MarsUndiscoveredApi.Models;
 using MarsUndiscoveredApi.Services;
+using MarsUndiscoveredApi.Extensions;
+
 using Serilog;
 
 try
@@ -7,7 +10,9 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Host.UseSerilog();
-    
+
+    builder.Services.AddApplicationInsightsTelemetry();
+
     Log.Logger = new LoggerConfiguration()
         .ReadFrom.Configuration(builder.Configuration)
         .CreateLogger();
@@ -19,9 +24,16 @@ try
     builder.Services.AddControllers();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+
+    var databaseSettings = new DatabaseSettings();
+
+    var databaseFileConfiguration = builder.Configuration.GetSection("MarsUndiscoveredDatabase");
+
+    databaseSettings.ConnectionString = databaseFileConfiguration.GetValueOrEnvironmentVariable(Constants.MarsUndiscoveredDbConnectionString);
+    databaseSettings.DatabaseName = databaseFileConfiguration.GetValueOrEnvironmentVariable(Constants.MarsUndiscoveredDbName);
+    databaseSettings.MorgueCollectionName = databaseFileConfiguration.GetValueOrEnvironmentVariable(Constants.MarsUndiscoveredMorgueCollectionName);
     
-    builder.Services.Configure<DatabaseSettings>(
-        builder.Configuration.GetSection("MarsUndiscoveredDatabase"));
+    builder.Services.AddSingleton(databaseSettings);
     
     builder.Services.AddSingleton<IMorgueService, MorgueService>();
 

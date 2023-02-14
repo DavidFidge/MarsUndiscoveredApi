@@ -8,16 +8,16 @@ public class MorgueService : IMorgueService
 {
     private readonly IMongoCollection<Morgue> _morgueCollection;
 
-    public MorgueService(IOptions<DatabaseSettings> databaseSettings)
+    public MorgueService(DatabaseSettings databaseSettings)
     {
         var mongoClient = new MongoClient(
-            databaseSettings.Value.ConnectionString);
+            databaseSettings.ConnectionString);
 
         var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.DatabaseName);
+            databaseSettings.DatabaseName);
 
         _morgueCollection = mongoDatabase.GetCollection<Morgue>(
-            databaseSettings.Value.MorgueCollectionName);
+            databaseSettings.MorgueCollectionName);
     }
 
     public async Task<List<Morgue>> GetAsync() =>
