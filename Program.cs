@@ -10,8 +10,13 @@ try
     var builder = WebApplication.CreateBuilder(args);
 
     builder.Host.UseSerilog();
+    
+    var telemetryConnectionString = Environment.GetEnvironmentVariable(Constants.MarsUndiscoveredTelemetryConnectionString);
 
-    builder.Services.AddApplicationInsightsTelemetry();
+    if (!String.IsNullOrEmpty(telemetryConnectionString))
+        builder.Services.AddApplicationInsightsTelemetry(c => c.ConnectionString = telemetryConnectionString);
+    else
+        builder.Services.AddApplicationInsightsTelemetry();
 
     Log.Logger = new LoggerConfiguration()
         .ReadFrom.Configuration(builder.Configuration)
