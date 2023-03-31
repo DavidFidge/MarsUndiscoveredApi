@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { MorgueComponent } from './morgue/morgue.component';
 import { MorgueItemComponent } from './morgue-item/morgue-item.component';
+import { BlogComponent } from './blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MorgueItemComponent } from './morgue-item/morgue-item.component';
     HomeComponent,
     CounterComponent,
     MorgueComponent,
-    MorgueItemComponent
+    MorgueItemComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -29,6 +31,7 @@ import { MorgueItemComponent } from './morgue-item/morgue-item.component';
       { path: 'counter', component: CounterComponent },
       { path: 'morgue', component: MorgueComponent },
       { path: 'morgue-item/:id', component: MorgueItemComponent },
+      { path: 'blog', component: BlogComponent },
     ])
   ],
   providers: [],

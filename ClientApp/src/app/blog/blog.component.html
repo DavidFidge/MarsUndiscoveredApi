@@ -1,0 +1,30 @@
+<div>
+  <h3 class="pt-4">2023-03-31 - Tiles and Animation</h3>
+  <p>I liked the animation and graphics ideas in Rift Wizard and thought it would be a good fit for my game.  The key features are:</p>
+  <ul>
+    <li>The palette in each tile is limited to several shades of one or two colours, with features such as eyes or claws allowed to deviate from this so that they stand out</li>
+    <li>Each animation is limited to two or three frames</li>
+    <li>Pixel-style 16x16 tiles which only take minutes to create and still look good when expanded to 64x64.</li>
+  </ul>
+  <p>My current ascii graphics were using non-square tiles with a height close to 64px, so the first step was to add a square font.  After investigating true type fonts and not finding much to my liking I found that <a href="https://www.gridsagegames.com/rexpaint/">RexPaint</a> has a nice CodePage 437 square font that looks good at 64x64.  It is used in <a href="https://www.gridsagegames.com/cogmind/">Cogmind</a> and so has been specifically designed for a roguelike experience.  Best of all it is free.</p>
+  <p>After implementing the new square ascii fonts I was then able to go ahead and implement the graphical tiles.  In code, the Composite pattern is used so that if a tile graphic has not been added yet then there's an automatic fallback to the ascii tile.  This means I can still add new features without having to do the art for them right away.</p>
+
+  <h3 class="pt-4">2023-03-31 - Architecture</h3>
+  <p>The goal from the start was to ensure that the game and views remain separate.  There are 2 distinct layers in the architecture:</p>
+  <ul>
+    <li>The View layer, which also contains the composite root (Program.cs) and the main game loop (MarsUndiscovered.cs)</li>
+    <li>The Game World layer, whic contains only game world logic</li>
+  </ul>
+
+  <p>The dependencies are arranged thus:</p>
+  <ul>
+    <li>The game project has no dependencies on the view project</li>
+    <li>The view project can depend on the game project</li>
+  </ul>
+
+  <p>This separation of concerns makes the game layer much easier to test as well as being conceptually easier as view concerns are not getting in the way.</p>
+
+  <p>In an ideal world we would separate view->game dependencies into a separate library which contains only interfaces and DTO's to achieve true separation of concerns and allow the view even more flexibility to move without the game. However this adds significant overhead for a one-man project as everything being returned back must be converted to a DTO.</p>
+
+  <p>The game world project exposes several interfaces for the view to communicate through, currently IGameWorldEndpoint and IGameWorldConsoleCommandEndpoint.  The game world will return either a constructed DTO or it may also return its actual game objects that it uses for processing.  The view code will need to be disciplined with its use of the returned objects to make sure it uses them in a 'data-get' manner only (this risk is the cost of not creating coverters and DTO's for everything).  It is enough of a separation so that later down the line it wouldn't be too overwhelming to add a new view e.g. implementing a JavaScript client.</p>
+</div>
